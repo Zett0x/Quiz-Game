@@ -1,0 +1,38 @@
+*{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    box-sizing: border-box;
+}
+.title{
+    margin: 25px;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+}
+.answer{
+    width: 10rem;
+    padding: 5px;
+    border: 1.3px solid black;
+    border-radius: 6px;
+    background-color: rgb(67, 67, 248);
+    color: white;
+    margin: 10px;
+}
+.answer:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: all 0.2s ease;
+}
+.error{
+    background-color: red;
+}
+.correct{
+    background-color: green;
+}
+footer{
+    padding: 10px;
+}
