@@ -8,8 +8,7 @@ console.log(scoreElement);
 let page=0;
 let score=0;
 const data = [
-  {
-    usada:false,
+  { id:1,
     title: "¿Cuál de las siguientes opciones no es un editor de código?",
     repuestas: [
         { id: 1, res: "vim", correct: false },
@@ -17,20 +16,33 @@ const data = [
         { id: 3, res: "emacs", correct: false },
         { id: 4, res: "word", correct: true },
     ],
+    usada:false
   },
   {
-    usada:false,
+    id:2,
     title: "test 2",
     repuestas: [
         { id: 1, res: "a", correct: false },
-        { id: 2, res: "gasode", correct: false },
+        { id: 2, res: "gasode", correct: true },
         { id: 3, res: "eaggcs", correct: false },
-        { id: 4, res: "wgasg", correct: true },
+        { id: 4, res: "wgasg", correct: false },
     ],
+    usada:false
+  },
+  {  
+    id:3,
+    title: "¿Cuál de de código?",
+    repuestas: [
+        { id: 1, res: "vm", correct: false },
+        { id: 2, res: "vscode", correct: false },
+        { id: 3, res: "acs", correct: false },
+        { id: 4, res: "wrd", correct: true },
+    ],
+    usada:false
   }
 ];
 
-console.log(data);
+
 //FUNCTIONS 
 const clearAnswers=()=>{container.innerHTML=""};
 const nextQuestion=()=>{
@@ -38,7 +50,7 @@ const nextQuestion=()=>{
         page++;
     }
     else page=0;
-    console.log(page);
+  
     clearAnswers();
     loadQuestion(page);
 
@@ -63,10 +75,10 @@ const loadPage=()=>{
 const updateScore=()=>{scoreElement.textContent=`Score: ${score}`;}
 
 const checkAnswer=(e)=>{
-    if(e.target.id==="answers")
+    if(e.target.id==="answers" || data[page].usada)
     return;
     let res=e.target.id;
-    if(data[page].repuestas[res-1].correct /*&& !data[page].usada*/)
+    if(data[page].repuestas[res-1].correct && !data[page].usada)
     {
         e.target.classList.add("correct");
         score++;
@@ -78,10 +90,15 @@ const checkAnswer=(e)=>{
     else
     e.target.classList.add("error");
 
-    //data[page].usada=true;
+    data[page].usada=true;
 
     setTimeout(() => {
         nextQuestion();
+        loadPage();
+       if(page===0)
+       data[data.length-1].usada=false;
+       else
+       data[page-1].usada=false;
     }, 800);
     
     
